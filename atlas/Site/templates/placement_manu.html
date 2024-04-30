@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="#" />
+    <link href="../static/site.css" rel="stylesheet">
+    <link href="../static/placement_m.css" rel="stylesheet">
+    <title>ATLAS Elections 2024</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+ <body>
+    <nav>
+        <ul>
+            <li style="border-left: dashed;"><a class="active" href="http://127.0.0.1:5000/">Accueil</a></li>
+            <li><a href="http://127.0.0.1:5000/simulation/">Simulation</a></li>
+            <li style="float:right;"><a href="http://127.0.0.1:5000/credits/">Crédits</a></li>
+            <li style="float:right;border-left: dashed;"><a href="http://127.0.0.1:5000/documentation/">Documentation</a></li>
+        </ul>
+    </nav>
+    
+    <h1>ATLAS</h1>
+
+        <h2>Campagne 2024</h2>
+        <p> Vous pouvez à présent placer vos candidats. </p>
+        <p><code>Abscisse</code>: <span id="x">n/a</span></p>
+        <p><code>Ordonnée</code>: <span id="y">n/a</span></p>
+
+        <p id ="InfoCandidats" style="display: none;float: right;width:fit-content; padding: 10px 10px 10px 10px ;border:solid;border-color: black;border-radius: 20px;position: relative;">
+            <label for="c_infoc" id="none">Je souhaite générer automatiquement les informations sur ce candidat : </label>
+            <input type="checkbox" id="c_infoc" style="width: 20px;" onclick="fillRandom()"/>  <br>
+
+            Je rentre les informations relatives au candidat que je viens de placer. <br>
+            Nom : <input type="text" id ="cand_name" name="Nom:" required/> <span id='err_name' style="display:none"></span> <br>
+            Age : <input type="number" id ="cand_age" name="Age:" required/> <span id='err_age' style="display:none"></span> <br>
+            <label for="c_infoc" id="none">Mon candidat est un homme : </label>
+            <input type="checkbox" id="cand_sexe" style="width: 20px;"/> <br>
+
+            Pourcentage de visilité : <input type="number" id ="cand_pop" name="Pourcentage de visibilité:" required/>
+            <span id='err_pop' style="display:none"></span><br>
+
+            <input type="button" value="Tout est bon !" onclick="information_candidats()">
+        </p>
+        
+
+        <img src="../static/grillage_political_compass_leg.png" alt="Ma boussolle politique" />
+
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+
+        <p id="afficheNbCand"><br></p>
+        <p id="afficheNbElect"><br></p>
+
+        <p>Rappel:
+            <ul>
+                <li> Gauche = Système économique de gauche </li>
+                <li> Droite = Système économique de droite </li>
+                <li> Haut = Système social autoritaire </li>
+                <li> Bas = Système social libertaire </li>
+            </ul>
+        </p>
+    
+    <script>
+        function send_Data(){
+            $.ajax({
+                url:'/process-data',
+                type : 'POST',
+                contentType:'application/json',
+                data: JSON.stringify({c : tmp_candidats, x: axe_x, y : axe_y, candidats : candidat_list}),
+                success : function() {
+                    document.forms['myForm'].submit();
+                },
+                error: function(error) { 
+                    console.log(error); 
+                }
+            })
+            document.getElementById("fini").style.display = "none";
+        }
+
+    </script>
+    <div id="fini" style="display:none;">
+        <button type="button" onclick='send_Data()'> J'ai fini !</button>
+    </div>
+    <form action = '/resultats_manuelle/' name="myForm"></form>
+    
+
+    
+    </body>
+    <script>
+    var nb_electeurs=JSON.parse('{{nb_electi|tojson}}');
+    var nb_candidate=JSON.parse('{{nb_candi|tojson}}');
+    </script>
+    <script type="text/javascript" src="../static/placement_m.js"></script>
+
+</html>

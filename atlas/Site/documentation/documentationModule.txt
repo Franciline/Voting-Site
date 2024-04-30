@@ -1,0 +1,28 @@
+DOCUMENTATION SUR LE DOSSIER MODULE 
+
+Le dossier module comporte les fichiers/module suivants : 
+- election : module python 
+- main.py : fichier exemple d'un main pour tester le sous-module ranking 
+- testR : fichier des tests de toutes les fonctions du sous-module ranking du module election 
+- testS : fichier des tests de toutes les fonctions du sous-module scoring du module election 
+
+le module election se compose des fichiers/sous-modules suivants : 
+- ranking : sous-module de election 
+- scoring : sous-module de election 
+- __init__.py : fichier pour gérer les importations 
+- classes.py : fichier des classes utilisées par le module election 
+- var.py : fichier des variables globales utilisées par le module election, en lien avec le site développé 
+
+le sous-module ranking de election se compose des fichiers suivants : 
+- __init__.py : fichier pour gérer les importations 
+- initR.py : fichier des fonctions pour initialiser l'élicitation d'une élection selon le ranking 
+- voteR.py : fichier des fonctions d'agrégations selon le ranking 
+- statsR.py : fichiers des fonctions pour calculer des statistiques supplémentaires selon le ranking 
+- comiteR.py : fichiers des fonctions pour élire des comités selon le ranking 
+
+le sous-module ranking de election se compose des fichiers suivants : 
+- __init__.py : fichier pour gérer les importations 
+- initS.py : fichier des fonctions pour initialiser l'élicitation d'une élection selon le scoring 
+- voteS.py : fichier des fonctions d'agrégations selon le scoring 
+
+

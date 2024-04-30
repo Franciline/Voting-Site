@@ -1,0 +1,37 @@
+Documentation des fichiers liés à HTML JS et CSS
+
+Dans les dossiers "static" et "templates" se trouvent les fichiers concernées.
+
+Dossier "templates":
+    contient tous les fichiers HTML du site
+
+    - affiche_comite.HTML   : page résultats comité
+    - affiche_election.HTML : page résultats affice
+    - comite.HTML           : page choix contraintes comité
+    - credits.HTML          : page crédits
+    - documentation.HTML    : page documentation 
+    - liquide.HTML          : page résultats démocratie liquide
+    - placement_manu.HTML   : page du placement manuelle
+    - simulation.HTML       : page de simulation
+    - site.html             : page d'accueil 
+
+Dossier "static":
+    contient tous les fichiers associés CSS et JS nécessaires aux pages HTML
+
+    - accueil.CSS
+    - affiche_comite.CSS
+    - affiche_election.CSS
+    - comite.CSS
+    - election.CSS
+    - liquide.CSS
+    - placement_m.CSS
+    - site.CSS
+
+    - affiche_comite.JS
+    - affiche_election.JS
+    - comite.JS
+    - election.CSS
+    - liquide.JS
+    - placement_m.JS
+    - site.JS
+    - variables_tests.JS : fichier contenant des variables tests 

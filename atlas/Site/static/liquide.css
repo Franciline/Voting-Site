@@ -1,0 +1,123 @@
+@font-face {
+    font-family: 'Humongous';
+    src: url('fonts/Humongous\ of\ Eternity\ St.ttf') format('truetype');
+}
+
+h1{
+    text-align: left;
+    font-family: "Humongous",sans-serif;
+    font-size: 75px;
+    margin-top: 0px;
+    margin-left: 6%;
+    margin-bottom: 0%;
+    font-weight: bold;
+}
+
+h3{
+    font-weight: bold;
+    font-size: 60px;
+}
+
+body{
+    font-family: 'Avenir', sans-serif; 
+    color: #ca83e0;  
+    background-color: lavenderblush; 
+}
+
+nav ul {
+    position: sticky;
+    top: 0px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #c544;
+    border-bottom: solid;
+    border-top: solid;
+}
+  
+nav li {
+float: left;
+}
+  
+nav li a {
+    font-family: "Lucinda Console" , "Courier New" , monospace;
+    font-size: 40px;
+    font-weight: bold;
+    display: block;
+    color: #CA83E0;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-right: dashed;
+}
+
+nav li a:hover{
+    font-style: italic;
+}
+
+a{
+    text-decoration: underline;
+    color:#ca83e0;
+}
+
+img {
+    position: absolute;
+    width: 673px;
+    height: 735px;
+    top: 147px;
+    left:613px;
+}
+
+#myCanvas {
+    position: absolute;
+    top: 190px;
+    left:640px;
+}
+
+#canvas_elu {
+    position: absolute;
+    top: 190px;
+    left:640px;
+}
+
+#canvas_selection {
+    position: absolute;
+    top: 190px;
+    left:640px;
+}
+
+#field_legende{
+    top : 20%;
+    width: 25%;
+    border: solid;
+}
+
+#legende {
+    position : relative;
+    width : 75%;
+    left : 20px;
+}
+
+#scale {
+    position : relative;
+    width : 75%;
+    left : 20px;
+}
+
+legend {
+    font-size:150%;
+    padding: 5px 10px;
+}
+
+#satisfaction{
+    width: 25%;
+    border: solid;
+}
+
+div.part_gauche{
+    position : absolute;
+    top : 10%;
+    right : 1%;
+    width: 30%;
+}

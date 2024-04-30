@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Humongous';
+    src: url('fonts/Humongous\ of\ Eternity\ St.ttf') format('truetype');
+  }
+
+h1{
+    text-align: center;
+    font-family: "Humongous",sans-serif;
+    font-size: 100px;
+    margin-top: 0px;
+    font-weight: bold;
+}
+
+h3{
+  font-weight: bold;
+  font-size: 60px;
+}
+
+body {
+    font-family: 'Avenir', sans-serif; 
+    color: #ca83e0;  
+    background-color: lavenderblush;  
+}
+
+nav ul {
+    position: sticky;
+    top: 0px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #c544;
+    border-bottom: solid;
+    border-top: solid;
+}
+  
+nav li {
+float: left;
+}
+  
+nav li a {
+    font-family: "Lucinda Console" , "Courier New" , monospace;
+    font-size: 40px;
+    font-weight: bold;
+    display: block;
+    color: #CA83E0;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-right: dashed;
+}
+
+nav li a:hover{
+    font-style: italic;
+}
+
+a{
+    text-decoration: underline;
+    color:#ca83e0;
+}
+
+p{
+  line-height: 50px;
+  margin-left: 20px;
+  margin-right: 10px;
+  font-size: 30px;
+}
+
+#boussole{
+    position: absolute;
+    top:200px ;
+    left: 650px;
+}
+
+.btn {
+    line-height: 100px;
+    height: 100px;
+    text-align: center;
+    width: 350px;
+    cursor: pointer;
+  }
+
+  .btn-three {
+    color: #ca83e0;
+    font-size: 30px;
+    transition: all 0.5s;
+    position: relative;
+  }
+  .btn-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(202,131,224,0.1);
+    transition: all 0.3s;
+  }
+  .btn-three:hover::before {
+    opacity: 0 ;
+    transform: scale(0.5,0.5);
+  }
+  .btn-three::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(202,131,224,0.5);
+    transform: scale(1.2,1.2);
+  }
+  .btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1,1);
+  }

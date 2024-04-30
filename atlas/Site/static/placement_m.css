@@ -1,0 +1,19 @@
+p{
+    font-size: 15px;
+    line-height: normal;
+}
+
+img {
+    position: absolute; 
+    width: 673px; 
+    height: 735px; 
+    top: 237px; 
+    left:630px;
+}
+
+#myCanvas {
+    position: absolute;
+    border:1px solid black; 
+    top: 289px; 
+    left:666px;
+}

@@ -1,0 +1,13 @@
+from math import sqrt
+
+
+
+COORD_MIN = 0
+COORD_MAX = 600
+
+DIST_MAX = sqrt(2*COORD_MAX*COORD_MAX) #~848.53
+
+SCORE_MIN = 1
+SCORE_MAX = 100
+
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Contraintes Comite - Projet ATLAS</title>
+    <link rel="shortcut icon" href="#" />
+    <link href="../static/site.css" rel="stylesheet">
+    <link href="../static/comite.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+ <body>
+  <nav>
+    <ul>
+        <li style="border-left: dashed;"><a class="active" href="http://127.0.0.1:5000/">Accueil</a></li>
+        <li><a href="http://127.0.0.1:5000/simulation/">Simulation</a></li>
+        <li style="float:right;"><a href="http://127.0.0.1:5000/credits/">Crédits</a></li>
+        <li style="float:right;border-left: dashed;"><a href="http://127.0.0.1:5000/documentation/">Documentation</a></li>
+    </ul>
+</nav>
+
+<h1>ATLAS</h1>
+
+    <h2>Campagne 2024</h2>
+
+    <!-- Formulaire des contraintes à remplir et renvoyer -->
+    <form name="myForm" action="/affiche_comite" method="POST">
+      <!-- Contraintes globales -->
+      <h4>Contraintes globales :</h4>
+      <div id="contraintes_globales">
+
+        <div id="parite">
+          <input type="checkbox" onclick="parite()">
+          <label>Parité sexe</label>
+        </div>
+
+        <div id="distance">
+          <input type="checkbox" onclick="distance()">
+          <label>Distance</label>
+        </div>
+
+      </div>
+
+      <!-- Contraintes individuelles -->
+      <h4>Contraintes individuelles :</h4>
+      <div id="donnees"></div>
+      
+      <button type="button" onclick='send_Data()'> J'ai fini !</button>
+    </form>
+
+    <p></p>
+
+    <script>
+
+      //Fonction d'envoi des données
+      function send_Data(){
+        if(document.getElementsByName('myForm')[0].checkValidity()){
+          var donnees = recupDonnees();
+          var globales = recupGlobales();
+          $.ajax({
+              url:'/comite_contraintes',
+              type : 'POST',
+              contentType:'application/json',
+              data: JSON.stringify({"globales" : globales , "individuelles" : donnees}),
+              success : function() {
+                  document.forms['myForm'].submit();
+              },
+              error: function(error) { 
+                  console.log(error); 
+              }
+          });
+        } else{
+          alert("Salut salut!\nIl semblerait que tu sois trop faible d'esprit pour entrer de simples informations...!\nMais tu peux y arriver, continue!");
+        }
+
+      }
+
+    </script>
+  </body>
+  <script>
+    var nbCand = JSON.parse('{{nb_cand|tojson}}');
+  </script>
+
+  <script type="text/javascript" src="../static/comite.js"></script>
+</html>

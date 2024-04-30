@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width" />
+      <link rel="shortcut icon" href="#" />
+      <link href="../static/affiche_comite.css" rel="stylesheet">
+      <title>Simulation Comité - Projet ATLAS</title>
+    </head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <body>
+    <nav>
+      <ul>
+        <li style="border-left: dashed;"><a class="active" href="http://127.0.0.1:5000/">Accueil</a></li>
+        <li><a href="http://127.0.0.1:5000/simulation/">Simulation</a></li>
+        <li style="float:right;"><a href="http://127.0.0.1:5000/credits/">Crédits</a></li>
+        <li style="float:right;border-left: dashed;"><a href="http://127.0.0.1:5000/documentation/">Documentation</a></li>
+      </ul>
+    </nav>
+
+    <h1>ATLAS</h1>
+
+    <img id="boussolle" src="../static/grillage_political_compass_leg.png" alt="boussolle politique">
+    <canvas id="myCanvas" width="620px" height="620px" style="border:0px;"></canvas>
+    <canvas id="canvas_comite" width="620px" height="620px" style="border:0px;"></canvas>
+    <canvas id="canvas_selection" width="620px" height="620px" style="border:0px;"></canvas>
+
+
+    <!-- Affichage de la légende -->
+    <fieldset id="field_legende">
+      <legend>Légende</legend>
+      <ul>
+        <li> Gauche = Système économique de gauche </li>
+        <li> Droite = Système économique de droite </li>
+        <li> Haut = Système social autoritaire </li>
+        <li> Bas = Système social libertaire </li>
+      </ul>
+
+      <canvas id="legende" width="500px" height="55px" style="border:0px"></canvas>
+
+      <p>Montrer les points des :</p>
+      <div>
+        <input type="checkbox" id="showCand" checked="true" onclick=afficherBoussole()>
+        <label for="myCheck">candidats</label> <br>
+        <input type="checkbox" id="showVot" checked="true" onclick=afficherBoussole()>
+        <label for="myCheck">électeurs</label><br>
+      </div>
+    </fieldset>
+
+
+
+
+    <!-- Affichage contraintes -->
+    <fieldset id="contraintes_glob" style="width:25%; border:solid; height: fit_content;">
+      <legend>Contraintes globales</legend>
+    </fieldset>
+
+    <fieldset id="contraintes_ind" style="width:25%; border:solid; overflow-y:auto; height: 200px;">
+      <legend>Contraintes individuelles</legend>
+    </fieldset>
+
+
+
+
+
+    <!-- Affichage des résultats en fontion des méthodes de vote -->
+    <div class="part_gauche">
+      <p> Choisir méthode de vote</p>
+
+      <button class="butt" id="buttPlur" style="background-color: white;" onclick='afficherComiteElu(3)'>Pluralité</button>
+      <button class="butt" id="buttVeto" style="background-color: white;" onclick='afficherComiteElu(0)'>Véto</button>
+      <button class="butt" id="buttBord" style="background-color: white;" onclick='afficherComiteElu(4)'>Borda</button>
+      <button class="butt" id="buttSTV"  style="background-color: white;" onclick='afficherComiteElu(1)'>Eliminations successives</button>
+      <button class="butt" id="buttCond" style="background-color: white;" onclick='afficherComiteElu(2)'>Condorcet</button>
+      <button class="butt" id="buttCope" style="background-color: white;" onclick='afficherComiteElu(5)'>Copeland</button>
+      <button class="butt" id="buttSimp" style="background-color: white;" onclick='afficherComiteElu(6)'>Simpson</button>
+
+      <p><br></p>
+
+      <!-- Affichage des noms du comité gagnant -->
+      <fieldset id='comite_elu' style="width:525px; border:solid;">
+        <legend>Comite élu</legend>
+      </fieldset>
+
+      <!-- Affichage des noms des deuxième et troisième comité possible -->
+      <fieldset id="classement" style="width:525px; border:solid;">
+        <legend>Autres comités possibles</legend>
+        
+        <fieldset id="comite2" style="width:40%; float: left; border:solid;">
+          <legend>Comité 2</legend>
+        </fieldset>
+
+        <fieldset id="comite3" style="width:40%; float: left; border:solid;">
+          <legend>Comité 3</legend>
+        </fieldset>
+      </fieldset>
+
+      <!-- Affichage des noms de tous les candidats -->
+      <fieldset id="liste_candidats" style="width:525px; border:solid; height: fit-content; margin-bottom: 30%;">
+        <legend>Liste des candidats</legend>
+      </fieldset>
+    </div>
+
+
+
+    <!-- Partie javascript -->
+    <script type="text/javascript" src="../static/affiche_comite.js"></script>
+    <script>
+      var liste_xv = JSON.parse('{{liste_xv|tojson}}');   //liste des coordonnées x des electeurs
+      var liste_yv = JSON.parse('{{liste_yv|tojson}}');   //liste des coordonnées y des electeurs
+      var liste_gagnants = JSON.parse('{{res_comites_mdte|tojson}}');   // liste par méthodes de votes: listes des trois premiers comites possibles
+      var liste_candidat = JSON.parse('{{liste_all_candi|tojson}}');    // liste de tous les candidats
+      var liste_cont_ind = JSON.parse('{{list_cont_indiv|tojson}}');    // liste des contraintes individuelles
+      var liste_cont_glob = JSON.parse('{{list_cont_glob|tojson}}');    // liste des contraintes globales
+      var liste_satisf = JSON.parse('{{liste_satisf|tojson}}');    // liste de satisfaction de chaque candidats
+    </script>
+
+  </body>
+</html>

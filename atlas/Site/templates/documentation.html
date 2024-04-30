@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="shortcut icon" href="#" />
+        <link href="../static/site.css" rel="stylesheet">
+        <title>Documentation - Projet ATLAS</title>
+    </head>
+    
+
+    <body>
+        <nav>
+            <ul>
+                <li style="border-left: dashed;"><a class="active" href="http://127.0.0.1:5000/">Accueil</a></li>
+                <li><a href="http://127.0.0.1:5000/simulation/">Simulation</a></li>
+                <li style="float:right;"><a href="http://127.0.0.1:5000/credits/">Crédits</a></li>
+                <li style="float:right;border-left: dashed;"><a href="http://127.0.0.1:5000/documentation/">Documentation</a></li>
+            </ul>
+        </nav>
+        
+        <h1>ATLAS</h1>
+
+        <div style="padding-left:10% ; padding-right:10% ; padding-bottom:10%;">
+            <p> Une élection se compose de candidats et d'électeurs.</p>
+            
+            <p>En cours, nous avons vu 3 méthodes d'élicitation pour obtenir un vote. 
+            Le vote peut se baser sur un classement de candidats <b>(ranking)</b>, sur un score attribué à chaque candidat <b>(scoring)</b> ou bien
+            sur l'approbation d'un ensemble de candidats <b>(approbation)</b>.
+            <br>
+            Selon la méthode d'élicitation, les méthodes d'agrégation sont différentes.
+            
+            <br><br>
+
+            Ce site se concentre sur la simulation d'une élection selon la méthode d'élicitation de ranking. <br>
+            Ce site définit donc un vote comme un classement des candidats.<br> 
+            Voici quelques unes des méthodes liées au ranking implémentées sur ce site :
+            
+            <br><br>
+            
+            <b>Pluralité</b> : Cette méthode attribue 1 point pour le candidat en tête du classement. 
+                Le candidat avec le score le plus élevé est élu et les égalités sont départagées par le premier candidat inscrit.
+                
+                <br><br>
+                
+                <b>Veto</b> : Cette méthode attribue 1 point pour chaque candidat dans le classement, hormis le dernier du classement.
+                Le candidat avec le score le plus élevé est élu et les égalités sont départagées par le premier candidat inscrit.
+                
+                <br><br>
+                
+                <b>Borda</b> : Cette méthode attribue un score proportionnel à la position du candidat dans le classement. Le dernier recevant 0 point.
+                Le candidat avec le score le plus élevé est élu et les égalités sont départagées par le premier candidat inscrit.
+                
+                <br><br>
+                
+                <b>Stv</b> : Cette méthode attribue 1 point pour le candidat en tête du classement.
+                Le candidat avec le score le moins élevé est éliminé (en cas d'égalité, le premier candidat inscrit ayant le score le moins élevé est éliminé).
+                On réitère avec les candidats en lice, jusqu'à qu'il ne reste plus qu'un seul candidat. Ce candidat est donc élu.
+                
+                <br><br>
+                
+                <b>Condorcet</b> : Cette méthode se concentre sur la comparaison des préférences majoritaires des électeurs entre chaque candidat. 
+                Pour chaque comparaison entre chaque candidat, on étudie le nombre d'électeurs qui préfère le candidat 1 au candidat 2 et inversement.
+                Le candidat majoritairement préféré gagne 1 point et l'autre candidat gagne 0 point. En cas d'égalité, les deux candidats gagnent 0.5 point.
+                Le candidat qui gagne toutes ses comparaisons est élu.
+                À noter que cette méthode peut ne renvoyer aucun gagnant. Cela arrive lorsque chaque candidat perd au moins une comparaison.
+                
+                <br><br>
+                
+                <b>Copeland</b> : Cette méthode se concentre sur la comparaison des préférences majoritaires des électeurs entre chaque candidat. 
+                Pour chaque comparaison entre chaque candidat, on étudie le nombre d'électeurs qui préfère le candidat 1 au candidat 2 et inversement.
+                Le candidat majoritairement préféré gagne 1 point et l'autre candidat gagne 0 point. En cas d'égalité, les deux candidats gagnent 0.5 point.
+                Le candidat qui gagne le plus de comparaisons est élu et les égalités sont départagées par le premier candidat inscrit.
+                
+                <br><br>
+                
+                <b>Simpson</b> : Cette méthode se concentre sur la comparaison des préférences majoritaires des électeurs entre chaque candidat. 
+                Pour chaque comparaison entre chaque candidat, on étudie le nombre d'électeurs qui préfère le candidat 1 au candidat 2 et inversement.
+                Pour chaque candidat, on lui attribue le nombre le plus élevé d'électeurs qui ne le préfèrent pas par rapport à un autre candidat.
+                Le candidat ayant le nombre le moins élevé est élu et les égalités sont départagées par le premier candidat inscrit.
+                
+                <br><br><br>
+                Ce site implémente une élection avec la <b>délégation liquide</b> :<br><br>
+                - La délégation liquide est le choix pour chaque électeur de déléguer son vote à un autre électeur présent dans son rayon de distance.<br>
+                - L'électeur ayant délégué son vote ne sera donc pas comptabilisé, et l'électeur ayant reçu une délégation aura un poids de vote plus important.<br>
+                - À noter que le choix des électeurs de déléguer le vote ou non est aléatoire.
+            
+            <br><br>
+
+            Ce site implémente une élection de <b>comité avec contraintes</b>: <br><br>
+                - Le comité élu est un ensemble de candidats vérifiant les contraintes soumises aux attributs et maximisant le score du comité.<br>
+                - Le score du comité est calculé par la visibilité des candidats ainsi que par les scores de chaque candidat selon la méthode d'agrégation choisie.<br>
+                - À noter qu'il peut n'y avoir aucun comité valide selon les contraintes sélectionnées.
+            </p>
+        </div>
+
+    </body>
+</html>

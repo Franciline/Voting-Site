@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html onclick="checkValidity_range()">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="shortcut icon" href="#" />
+        <link href="../static/site.css" rel="stylesheet">
+        <link href="../static/election.css" rel="stylesheet">
+        <title>Simulation - Projet ALIAS</title>
+    </head>
+    
+
+    <body>
+        
+        <nav>
+            <ul>
+                <li style="border-left: dashed;"><a class="active" href="http://127.0.0.1:5000/">Accueil</a></li>
+                <li><a href="http://127.0.0.1:5000/simulation/">Simulation</a></li>
+                <li style="float:right;"><a href="http://127.0.0.1:5000/credits/">Crédits</a></li>
+                <li style="float:right;border-left: dashed;"><a href="http://127.0.0.1:5000/documentation/">Documentation</a></li>
+            </ul>
+        </nav>
+
+        <p style="float:right;position:relative; margin-right:250px;margin-top: 200px;">
+            <img style="width: 110%;" src="../static/grillage_political_compass_leg.png" alt="Ma boussole politique" />
+        </p>
+        
+        <h1>ATLAS</h1>
+
+
+
+        <h3 style="margin-left: 50px;">Simulation: </h3>
+
+        <form action="/simulation_form" method="POST">
+
+            
+            <p>
+                Mon élection comportera
+                <label style="width: 20px;">
+                    <!-- Nombre de candidas -->
+                    <select name="nb_candidats" id="nb_candidats" style="width: fit-content;">
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                </label>
+
+                candidats et
+                <label>
+                    <!-- Nombre d'électeurs -->
+                    <select name="nb_electeurs" style="width: fit-content;">
+                        <option selected value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="300">300</option>
+                        <option value="500">500</option>
+                        <option value="700">700</option>
+                        <option value="1000">1 000</option>
+                        <option value="2000">2 000</option>
+                      </select>
+                </label> 
+                électeurs
+                <br>
+                Je souhaite élire
+                <label style="width: 20px;">
+                    <!-- Type d'élection -->
+                    <select name="type_elec" id="type_elec" style="width: fit-content;">
+                        <option selected value="ind">une personne</option>
+                        <option value="comit"> un comité </option>
+                    </select>
+                    <span class="infos_comite" style="visibility: hidden;"> comptant 
+                        <!-- Taille du comité -->
+                        <select name="nb_comit" id="nb_comit" style="width: fit-content;">
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select> personnes 
+                    </span>
+                </label> 
+                <br> 
+                <!-- Placement manuel ou automatique  -->
+                <label for="AM" id ="check_AM">Je souhaite placer moi-même mes électeurs:</label>
+                <input name="type_placement" type="checkbox" id="AM" values="AM"> 
+                
+                <br>
+                <!-- Démocratie liquide -->
+                <label for="DelLiq" id="DEL">Démocratie liquide</label>
+          <input type="checkbox" id="DelLiq" value="DelLiq" onclick=show_infos_DL()>
+            
+            <br>
+            <!-- Distance si démocratie liquide -->
+          <span id= "InfoD" style="visibility: collapse;">
+            Choisissez la distance maximale à laquelle les votants peuvent déléguer leur vote :
+            <label>
+                <input type="number" style="font-size: 20px; width: 60px;" name="range" id = "DL_dist" step ="0.2" required minlength="1" maxlength="2"/> carreaux de rayon
+            </label>
+            </span>
+            <br>
+            <!-- Validation  -->
+          <input type="submit" value="Faites des chocapics !" 
+            style="font-size: 25px;border-color: darkmagenta;border-radius: 10px; background-color: rgba(202,131,224,0.1);"/>
+        </p>
+
+        </form>
+
+    </body>
+    <script>
+        /*Abréviations : 
+        - DL pour démocratie liquide
+        - CM pour Comité 
+        - CD pour Candidat*/
+
+        let info_dl = document.getElementById("InfoD");
+        let check_info_dl = document.getElementById("DelLiq");
+        let type_election = document.getElementById("type_elec");
+        let nb_cd = document.getElementById("nb_candidats");
+        let nb_cm = document.getElementById("nb_comit");
+        let dist_dl = document.getElementById("DL_dist");
+
+        function show_infos_DL(){
+            if (check_info_dl.checked){
+                info_dl.style.visibility="visible";
+            }
+            else{
+                info_dl.style.visibility="collapse";
+                document.getElementById("DL_dist").value="0";
+            }
+        }
+
+        // Vérifie la valeur entrée pour la distance dans DL
+        function checkValidity_range(){
+            if(!dist_dl.checkValidity()) dist_dl.value="0";
+        }
+
+        // Mets à jour la visibilité des infos du comité
+        type_election.addEventListener("input",function(){
+            let info_cm = document.getElementsByClassName("infos_comite");
+            if(type_election.value=="comit") info_cm[0].style.visibility="visible";
+            else info_cm[0].style.visibility="hidden";
+        });
+
+        // Vérifie que nb_cm <= nb_cd
+        nb_cd.addEventListener("input",function(){
+            if(parseInt(nb_cm.value) > parseInt(nb_cd.value)) nb_cm.value = nb_cd.value;
+        });
+
+        nb_cm.addEventListener("input",function() {
+            if(parseInt(nb_cm.value) > parseInt(nb_cd.value)) nb_cm.value = nb_cd.value;
+        });
+
+        // Vérifie que la distance est comprise entre 0 et 12 carrés
+        dist_dl.addEventListener("input",function(){
+            if(parseFloat(dist_dl.value)<0) dist_dl.value = 0;
+            else if (parseFloat(dist_dl.value)>12) dist_dl.value = 12;
+        })
+    </script>
+</html>

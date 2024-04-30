@@ -1,0 +1,21 @@
+Documentation des fichiers liés à Flask - python
+
+Les modules utilisés:
+- subprocess (pour lancer des commandes Bash)
+- Flask (pour lancer le site sur un serveur local)
+- sqlite3 (pour manipuler une BDD)
+- codecarbon (pour mesurer l'empreinte carbone)
+
+Fichiers:
+code_final.py :  
+    fichier qui contient toutes les fonctions qui définissent les URL pour naviguer sur HTML
+
+fonctions_manipulation_BDD.py :
+    fichier qui contient les fonctions qui manipulent la BDD et utilise les fonctions de Methodes_python_des_votes
+
+redirection_templates.py :      
+    fichier qui contient les fonctions qui redirigent les pages (render templates)
+
+bdd.sql :
+    fichier SQL qui permet de créer les tables de la base de données
+    

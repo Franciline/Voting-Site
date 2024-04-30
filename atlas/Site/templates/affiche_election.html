@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="shortcut icon" href="#" />
+        <link href="../static/affiche_election.css" rel="stylesheet">
+        <title>Simulation individuelle - Projet ATLAS</title>
+    </head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <body>
+    <nav>
+      <ul>
+          <li style="border-left: dashed;"><a class="active" href="http://127.0.0.1:5000/">Accueil</a></li>
+          <li><a href="http://127.0.0.1:5000/simulation/">Simulation</a></li>
+          <li style="float:right;"><a href="http://127.0.0.1:5000/credits/">Crédits</a></li>
+          <li style="float:right;border-left: dashed;"><a href="http://127.0.0.1:5000/documentation/">Documentation</a></li>
+      </ul>
+  </nav>
+  
+  <h1>ATLAS</h1>
+
+
+    <!-- Affichage de la boussole -->
+    <img id="boussolle" src="../static/grillage_political_compass_leg.png" alt="boussolle politique">
+    <canvas id="myCanvas" width="620px" height="620px" style="border:0px;"></canvas>
+    <canvas id="canvas_elu" width="620px" height="620px" style="border:0px;"></canvas>
+    <canvas id="canvas_selection" width="620px" height="620px" style="border:0px;"></canvas>
+
+    <!-- Affichage de la légende -->
+    <fieldset id="field_legende">
+      <legend>Légende</legend>
+      <ul>
+          <li> Gauche = Système économique de gauche </li>
+          <li> Droite = Système économique de droite </li>
+          <li> Haut = Système social autoritaire </li>
+          <li> Bas = Système social libertaire </li>
+      </ul>
+
+      <canvas id="legende" width="500px" height="100px" style="border:0px"></canvas>
+
+      <p>Montrer les points des :</p>
+      <div>
+        <input type="checkbox" id="showCand" checked="true" onclick=afficherBoussole()>
+        <label for="myCheck">candidats</label> <br>
+        <input type="checkbox" id="showVot" checked="true" onclick=afficherBoussole()>
+        <label for="myCheck">électeurs</label><br>
+      </div>
+    </fieldset>
+
+    <!-- Affichage de la satisfaction-->
+    <fieldset id="satisfaction">
+      <legend>Satisfaction</legend>
+    </fieldset>
+
+
+    <!-- Affichage des résultats et des statistiques en fonctions des méthodes de vote -->
+    <div class="part_gauche">
+
+      <p> Choisir méthode de vote</p>
+
+      <button class="butt" id="buttPlur" style="background-color: white;" onclick='methode(3)'>Pluralité</button>
+      <button class="butt" id="buttVeto" style="background-color: white;" onclick='methode(0)'>Véto</button>
+      <button class="butt" id="buttBord" style="background-color: white;" onclick='methode(4)'>Borda</button>
+      <button class="butt" id="buttSTV"  style="background-color: white;" onclick='methode(1)'>Eliminations successives</button>
+      <button class="butt" id="buttCond" style="background-color: white;" onclick='methode(2)'>Condorcet</button>
+      <button class="butt" id="buttCope" style="background-color: white;" onclick='methode(5)'>Copeland</button>
+      <button class="butt" id="buttSimp" style="background-color: white;" onclick='methode(6)'>Simpson</button>
+
+      <!-- Affichage du candidat élu -->
+      <fieldset style="width:525px;">  
+        <legend>Candidat élu</legend>
+        <center>
+          <p id="res" style="font-weight: bold; font-size:200%; margin: 5px 5px 10px 5px;"><br></p>  <!-- Ligne d'affichage du gagnant en fonction de la méthode -->
+        </center>
+      </fieldset>
+
+      <!-- Affichage des statistiques -->
+      <fieldset id="info" style="width:525px">
+        <legend>Informations statistiques</legend>
+
+        <p id="description_meth_vote"></p>
+
+        <div id="list_stats" style="display:none;">
+          <center>
+          <div class="selection" style="column-count: 3;">
+              <button type="arrow_button_left" onclick='gauche()'>Précédent</button>
+              <p id="nom_candidat"></p>
+              <button type="arrow_button_right" onclick='droite()'>Suivant</button>
+          </div>
+          </center>
+
+          <center>
+            <div id="statistiques"></div>
+          </center>
+
+          <canvas id="graphe" style="width:100%;max-width:600px"></canvas>
+        </div>
+
+        <div id="stv" style="display:none;">
+          <p id="stv_list"></p>
+        </div>
+      </fieldset>
+
+    </div>
+
+
+    <script>
+      var liste_xv = JSON.parse('{{liste_votant_candidats_xy[0]|tojson}}');
+      var liste_yv = JSON.parse('{{liste_votant_candidats_xy[1]|tojson}}');
+      var liste_xc = JSON.parse('{{liste_votant_candidats_xy[2]|tojson}}');
+      var liste_yc = JSON.parse('{{liste_votant_candidats_xy[3]|tojson}}');
+      var liste_resultats = JSON.parse('{{liste_resultats|tojson}}');
+      //liste_resultats_votes = [veto, stv, condorcet, pluralité, borda, copeland, simpson] sous forme [n1, n2 ... ] nb de vote pour chaque candidat
+      var liste_resultats_votes = JSON.parse('{{liste_resultats_votes|tojson}}');
+      var liste_candidat = JSON.parse('{{liste_candidat|tojson}}');
+      var liste_satisf = JSON.parse('{{liste_satisf|tojson}}');    // liste de satisfaction de chaque candidats
+
+    </script>
+    <script type="text/javascript" src="../static/affiche_election.js"></script>
+
+
+  </body>
+</html>
