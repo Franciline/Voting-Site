@@ -1,7 +1,7 @@
 # Voting-Site
 
 ## Description
-The project consisted to develop a website/software to simulate an electoral vote with different voting methods. <br/>
+The project was to develop a website/software to simulate an electoral vote with different voting methods. <br/>
 The website allows to simulate with 7 voting methods:
 - plurality
 - veto
