@@ -38,8 +38,9 @@ After running the file, you will have to open the local server that will show on
 
 ## Contributors
 This project was made by :
-- [Franciline](https://github.com/Franciline)
+- CHU Amélie [Franciline](https://github.com/Franciline)
 - [Maiiana](https://github.com/Maiiana)
 - [Marlhene](https://github.com/marlhene)
+- SAE LIM Thierry
 
 My main role in this project was to link the python functions used to calculate the winner of an election and the WebSite. I used SQLite3 to save on a database the candidates generated, and manipulated it using Flask to send the results to the HTML pages.
